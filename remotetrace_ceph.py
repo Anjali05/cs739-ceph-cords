@@ -28,7 +28,7 @@ import subprocess
 import argparse
 
 remote_user_name = 'anjali'
-conf_dir = '/home/anjali/my-cluster'
+conf_dir = '/home/anjali/my-cluster/'
 
 def invoke_remote_cmd(machine_ip, command):
 	cmd = 'ssh {0}@{1} \'{2}\''.format(remote_user_name, machine_ip, command)
@@ -43,7 +43,7 @@ def copy_file_from_remote(machine_ip, from_file_path, to_file_path):
 
 
 ###############Step 1: Start  errfs#############################
-
+print "starting step 1..."
 
 ERRFS_HOME = os.path.dirname(os.path.realpath(__file__))
 fuse_command_trace = 'sudo nohup ' + ERRFS_HOME + "/errfs -f -omodules=subdir,subdir=%s %s,nonempty,allow_other, trace %s > /dev/null 2>&1 &"
@@ -87,24 +87,26 @@ for i in range(0, machine_count):
 
 for i in range(0, machine_count):
     command = "sudo dd if=/dev/sdb2 of=/dev/sdb1;"
-	command =  "sudo cp -R " + data_dirs[i] + " " + data_dir_snapshots[i] + ";"
-	command += "sudo rm -rf " + trace_files[i]
-	invoke_remote_cmd(machines[i], command)
+    command +=  "sudo cp -R " + data_dirs[i] + " " + data_dir_snapshots[i] + ";"
+    command += "sudo rm -rf " + trace_files[i]
+    invoke_remote_cmd(machines[i], command)
 
 for i in range(0, machine_count):
-	command = fuse_command_trace%(data_dirs[i], data_dir_mount_points[i], trace_files[i])
-	invoke_remote_cmd(machines[i], command)
+    command = fuse_command_trace%(data_dirs[i], data_dir_mount_points[i], trace_files[i])
+    invoke_remote_cmd(machines[i], command)
 
+print "stopping step 1...."
 
 ###############Step 2: Stop OSD#############################
 
 #stop osd on every machine
 for i in range(0, machine_count):
 	command = "sudo systemctl stop ceph-osd@"+str(i)+";"
-	invoke_remote_cmd(machine[i], command)
+	invoke_remote_cmd(machines[i], command)
 
 
 
+print "stopping step 2..."
 
 ###############Step 3: Change configuration#############################
 #change configuration
@@ -113,17 +115,21 @@ cfg_file_cords = '{0}/ceph_cords.conf'.format(conf_dir)
 cfg_original = '{0}/ceph_original.conf'.format(conf_dir)
 cp_command = "sudo cp "+cfg_file_cords+" "+cfg_file
 os.system(cp_command)
-os.system('ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2')
+go_to_dir = 'cd {0}'.format(conf_dir)
+go_to_dir = 'cd ~/my-cluster'
+os.system(go_to_dir)
+os.system('sudo ceph-deploy --overwrite-conf admin ceph-p2-node1 ceph-p2-node2')
+os.system('cd -')
 
-
+print "stopping step 3...."
 
 ###############Step 4: Start OSD#############################
 #start osd on every machine
 for i in range(0, machine_count):
 	command = "sudo systemctl start ceph-osd@"+str(i)+";"
-	invoke_remote_cmd(machine[i], command)
+	invoke_remote_cmd(machines[i], command)
 
-
+print "stopping step 4....."
 
 
 ###############Step 5: Run Workload#############################
@@ -139,26 +145,28 @@ for i in range(0, machine_count):
 
 os.system(workload_command)
 
-
+print "stopping step 5"
 
 ###############Step 6: Stop OSD and revert back to original conf#############################
 
 #stop OSD
 for i in range(0, machine_count):
 	command = "sudo systemctl stop ceph-osd@"+str(i)+";"
-	invoke_remote_cmd(machine[i], command)
+	invoke_remote_cmd(machines[i], command)
 
 #revert configuration
 cp_back_command = "sudo cp "+cfg_original+" "+cfg_file
 os.system(cp_back_command)
+os.system(go_to_dir)
+print "running conf ",  os.system('pwd')
 os.system('ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2')
+os.system('cd -')
 
-
-
-###############Step 6: Unmount#############################
+print "stopping step 6..."
+###############Step 7: Unmount#############################
 i = 0
 for mp in data_dir_mount_points:
-	invoke_remote_cmd(machines[i], 'sudu fusermount -u ' + mp + '; sleep 1' + '; killall errfs >/dev/null 2>&1')
+	invoke_remote_cmd(machines[i], 'sudo fusermount -u ' + mp + '; sleep 1' + '; killall errfs >/dev/null 2>&1')
 	i += 1
 
 to_ignore_files = []
@@ -203,10 +211,10 @@ print 'Tracing completed...'
 
 
 
-###############Step 7: Start OSD#############################
+###############Step 8: Start OSD#############################
 for i in range(0, machine_count):
 	command = "sudo systemctl start ceph-osd@"+str(i)+";"
-	invoke_remote_cmd(machine[i], command)
+	invoke_remote_cmd(machines[i], command)
 
 
-print 'OSD started'
+print 'OSD started"'

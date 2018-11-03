@@ -78,33 +78,36 @@ for i in servers:
     run_remote(ips[i], command)
 
 
-os.system('sleep 8')
+os.system('sleep 1')
 
-cluster = rados.Rados(conffile= my_cluster_dir+'ceph.conf')
-print "\nlibrados version: " + str(cluster.version())
-print "Will attempt to connect to: " + str(cluster.conf_get('mon initial members'))
-cluster.connect()
+#cluster = rados.Rados(conffile= my_cluster_dir+'ceph.conf')
+#print "\nlibrados version: " + str(cluster.version())
+#print "Will attempt to connect to: " + str(cluster.conf_get('mon initial members'))
+#cluster.connect()
 
-print "\nCluster ID: " + cluster.get_fsid()
+#print "\nCluster ID: " + cluster.get_fsid()
 print "\n\nCluster Statistics"
 print "=================="
-cluster_stats = cluster.get_cluster_stats()
+#cluster_stats = cluster.get_cluster_stats()
 print "work fucker 4"
-for key, value in cluster_stats.iteritems():
-    print key, value
-pools = cluster.list_pools()
-for pool in pools:
+#for key, value in cluster_stats.iteritems():
+#    print key, value
+#pools = cluster.list_pools()
+#for pool in pools:
 #cluster.delete_pool(pool)
-    print pool
-cluster.create_pool('test')
+#    print pool
+#cluster.create_pool('test')
 print "1"
-ioctx = cluster.open_ioctx('test')
-print "2" , type(ioctx)
-ioctx.write_full("nap", "I am sleepy")
+#ioctx = cluster.open_ioctx('test')
+#print "2" , type(ioctx)
+#ioctx.write_full("nap", "I am sleepy")
 print "3"
-print ioctx.read("nap")
-ioctx.remove_object("nap")
+#print ioctx.read("nap")
+#ioctx.remove_object("nap")
 print "4"
-ioctx.close()
-cluster.shutdown()
+#ioctx.close()
+#cluster.shutdown()
 
+os.system('sudo rados mkpool test')
+os.system('echo "lol" > lolinput.txt')
+os.system('sudo rados -p test put lolobject lolinput.txt')

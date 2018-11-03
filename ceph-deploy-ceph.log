@@ -1,0 +1,195 @@
+[2018-11-03 20:25:08,615][ceph_deploy.conf][DEBUG ] found configuration file at: /home/anjali/.cephdeploy.conf
+[2018-11-03 20:25:08,615][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2
+[2018-11-03 20:25:08,615][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 20:25:08,616][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 20:25:08,616][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 20:25:08,616][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 20:25:08,616][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 20:25:08,616][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f660822e710>
+[2018-11-03 20:25:08,616][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 20:25:08,617][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2', 'ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 20:25:08,617][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f6608b51140>
+[2018-11-03 20:25:08,617][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 20:25:08,617][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 20:25:08,617][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 20:28:02,540][ceph_deploy.conf][DEBUG ] found configuration file at: /home/anjali/.cephdeploy.conf
+[2018-11-03 20:28:02,540][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2
+[2018-11-03 20:28:02,541][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 20:28:02,541][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 20:28:02,541][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 20:28:02,541][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 20:28:02,541][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 20:28:02,541][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f0d338ae710>
+[2018-11-03 20:28:02,542][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 20:28:02,542][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2', 'ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 20:28:02,542][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f0d341d1140>
+[2018-11-03 20:28:02,542][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 20:28:02,542][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 20:28:02,542][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 20:28:14,715][ceph_deploy.conf][DEBUG ] found configuration file at: /home/anjali/.cephdeploy.conf
+[2018-11-03 20:28:14,716][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2
+[2018-11-03 20:28:14,716][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 20:28:14,716][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 20:28:14,716][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 20:28:14,717][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 20:28:14,717][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 20:28:14,717][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f6db5220710>
+[2018-11-03 20:28:14,717][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 20:28:14,717][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2', 'ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 20:28:14,717][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f6db5b43140>
+[2018-11-03 20:28:14,717][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 20:28:14,718][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 20:28:14,718][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 20:49:41,198][ceph_deploy.conf][DEBUG ] found configuration file at: /home/anjali/.cephdeploy.conf
+[2018-11-03 20:49:41,198][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2
+[2018-11-03 20:49:41,199][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 20:49:41,199][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 20:49:41,199][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 20:49:41,199][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 20:49:41,199][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 20:49:41,200][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f428e18d710>
+[2018-11-03 20:49:41,200][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 20:49:41,200][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2', 'ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 20:49:41,200][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f428eab0140>
+[2018-11-03 20:49:41,200][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 20:49:41,200][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 20:49:41,201][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 21:04:40,978][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2018-11-03 21:04:40,979][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2-node1 ceph-p2-node2
+[2018-11-03 21:04:40,979][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 21:04:40,979][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 21:04:40,979][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 21:04:40,979][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 21:04:40,979][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 21:04:40,980][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f39131f2680>
+[2018-11-03 21:04:40,980][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 21:04:40,980][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 21:04:40,980][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f3913b14140>
+[2018-11-03 21:04:40,980][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 21:04:40,980][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 21:04:40,981][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 22:34:23,768][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2018-11-03 22:34:23,769][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2-node1 ceph-p2-node2
+[2018-11-03 22:34:23,769][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 22:34:23,769][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 22:34:23,769][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 22:34:23,770][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 22:34:23,770][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 22:34:23,770][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f8c247f8680>
+[2018-11-03 22:34:23,770][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 22:34:23,770][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 22:34:23,770][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f8c2511a140>
+[2018-11-03 22:34:23,771][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 22:34:23,771][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 22:34:23,771][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 22:34:35,559][ceph_deploy.conf][DEBUG ] found configuration file at: /home/anjali/.cephdeploy.conf
+[2018-11-03 22:34:35,560][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2
+[2018-11-03 22:34:35,560][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 22:34:35,560][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 22:34:35,560][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 22:34:35,560][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 22:34:35,561][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 22:34:35,561][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f2fc06b0710>
+[2018-11-03 22:34:35,561][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 22:34:35,561][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2', 'ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 22:34:35,561][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f2fc0fd3140>
+[2018-11-03 22:34:35,561][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 22:34:35,561][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 22:34:35,562][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 22:54:37,114][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2018-11-03 22:54:37,115][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2-node1 ceph-p2-node2
+[2018-11-03 22:54:37,115][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 22:54:37,115][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 22:54:37,115][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 22:54:37,115][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 22:54:37,116][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 22:54:37,116][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f20c7d1e680>
+[2018-11-03 22:54:37,116][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 22:54:37,116][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 22:54:37,116][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f20c8640140>
+[2018-11-03 22:54:37,116][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 22:54:37,117][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 22:54:37,117][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 22:54:51,922][ceph_deploy.conf][DEBUG ] found configuration file at: /home/anjali/.cephdeploy.conf
+[2018-11-03 22:54:51,923][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2
+[2018-11-03 22:54:51,923][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 22:54:51,923][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 22:54:51,924][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 22:54:51,924][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 22:54:51,924][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 22:54:51,924][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f3faa61a710>
+[2018-11-03 22:54:51,924][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 22:54:51,924][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2', 'ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 22:54:51,924][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f3faaf3d140>
+[2018-11-03 22:54:51,925][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 22:54:51,925][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 22:54:51,925][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 23:07:06,580][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2018-11-03 23:07:06,581][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2-node1 ceph-p2-node2
+[2018-11-03 23:07:06,581][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 23:07:06,581][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 23:07:06,581][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 23:07:06,582][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 23:07:06,582][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 23:07:06,582][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f9a2a917680>
+[2018-11-03 23:07:06,582][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 23:07:06,582][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 23:07:06,582][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f9a2b239140>
+[2018-11-03 23:07:06,583][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 23:07:06,583][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 23:07:06,583][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 23:07:28,291][ceph_deploy.conf][DEBUG ] found configuration file at: /home/anjali/.cephdeploy.conf
+[2018-11-03 23:07:28,291][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2
+[2018-11-03 23:07:28,292][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 23:07:28,292][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 23:07:28,292][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 23:07:28,292][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 23:07:28,292][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 23:07:28,292][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f58f4d94710>
+[2018-11-03 23:07:28,293][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 23:07:28,293][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2', 'ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 23:07:28,293][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f58f56b7140>
+[2018-11-03 23:07:28,293][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 23:07:28,293][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 23:07:28,293][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 23:21:28,592][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2018-11-03 23:21:28,592][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2-node1 ceph-p2-node2
+[2018-11-03 23:21:28,593][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 23:21:28,593][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 23:21:28,593][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 23:21:28,593][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 23:21:28,593][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 23:21:28,593][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f58eb2de680>
+[2018-11-03 23:21:28,594][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 23:21:28,594][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 23:21:28,594][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f58ebc00140>
+[2018-11-03 23:21:28,594][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 23:21:28,594][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 23:21:28,594][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2018-11-03 23:21:40,675][ceph_deploy.conf][DEBUG ] found configuration file at: /home/anjali/.cephdeploy.conf
+[2018-11-03 23:21:40,675][ceph_deploy.cli][INFO  ] Invoked (2.0.1): /usr/bin/ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2
+[2018-11-03 23:21:40,676][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2018-11-03 23:21:40,676][ceph_deploy.cli][INFO  ]  username                      : None
+[2018-11-03 23:21:40,676][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2018-11-03 23:21:40,676][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2018-11-03 23:21:40,676][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2018-11-03 23:21:40,676][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f4ea85ec710>
+[2018-11-03 23:21:40,677][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2018-11-03 23:21:40,677][ceph_deploy.cli][INFO  ]  client                        : ['ceph-p2', 'ceph-p2-node1', 'ceph-p2-node2']
+[2018-11-03 23:21:40,677][ceph_deploy.cli][INFO  ]  func                          : <function admin at 0x7f4ea8f0f140>
+[2018-11-03 23:21:40,677][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2018-11-03 23:21:40,677][ceph_deploy.cli][INFO  ]  default_release               : False
+[2018-11-03 23:21:40,677][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
