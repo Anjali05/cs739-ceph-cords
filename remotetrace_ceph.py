@@ -130,7 +130,7 @@ os.system(cfg_command)
 conf_str = "\n"
 for i in range(0, machine_count):
         conf_str += "[osd.{0}]\n".format(str(i))
-        conf_str += "osd data = {0}\n".format(data_dirs[i])
+        conf_str += "osd data = {0}\n".format(data_dir_mount_points[i])
         conf_str += "osd max object name len = 256\nosd max object namespace len = 64\n\n"
 
 with open(tmp_cfg_file, 'a') as fh:
@@ -153,89 +153,89 @@ for i in range(0, machine_count):
 
 print "stopping step 4....."
 
-###############Step 5: Run Workload#############################
+##############Step 5: Run Workload#############################
 
-# os.system('sleep 5')
+os.system('sleep 5')
 
-# workload_command +=  " trace "
-# for i in range(0, machine_count):
-#         workload_command += data_dir_mount_points[i] + " "
+workload_command +=  " trace "
+for i in range(0, machine_count):
+        workload_command += data_dir_mount_points[i] + " "
 
-# for i in range(0, machine_count):
-#         workload_command += machines[i] + " "
+for i in range(0, machine_count):
+        workload_command += machines[i] + " "
 
-# os.system(workload_command)
+os.system(workload_command)
 
-# print "stopping step 5"
+print "stopping step 5"
 
-###############Step 6: Stop OSD and revert back to original conf#############################
+##############Step 6: Stop OSD and revert back to original conf#############################
 
-## stop OSD
-# for i in range(0, machine_count):
-#         command = "sudo systemctl stop ceph-osd@"+str(i)+";"
-#         invoke_remote_cmd(machines[i], command)
+# stop OSD
+for i in range(0, machine_count):
+        command = "sudo systemctl stop ceph-osd@"+str(i)+";"
+        invoke_remote_cmd(machines[i], command)
 
-# print "done with stopping osd..going to sleep"
+print "done with stopping osd..going to sleep"
 
-# os.system('sleep 5')
-# #revert configuration
-# # TODO fix hard code
-# os.system("ceph-deploy --ceph-conf {0} --overwrite-conf admin {1} {2} {3}"
-#                   .format(cfg_file, machines[0], machines[1], machines[2]))
+os.system('sleep 5')
+#revert configuration
+# TODO fix hard code
+os.system("ceph-deploy --ceph-conf {0} --overwrite-conf admin {1} {2} {3}"
+                  .format(cfg_file, machines[0], machines[1], machines[2]))
 
-# print "stopping step 6..."
-###############Step 7: Unmount#############################
-# i = 0
-# for mp in data_dir_mount_points:
-#         invoke_remote_cmd(machines[i], 'sudo fusermount -u ' + mp + '; sleep 1' + '; killall errfs >/dev/null 2>&1')
-#         i += 1
+print "stopping step 6..."
+##############Step 7: Unmount#############################
+i = 0
+for mp in data_dir_mount_points:
+        invoke_remote_cmd(machines[i], 'sudo fusermount -u ' + mp + '; sleep 1' + '; killall errfs >/dev/null 2>&1')
+        i += 1
 
-# to_ignore_files = []
-# if ignore_file is not None:
-#         with open(ignore_file, 'r') as f:
-#                 for line in f:
-#                         line = line.strip().replace('\n','')
-#                         to_ignore_files.append(line)
+to_ignore_files = []
+if ignore_file is not None:
+        with open(ignore_file, 'r') as f:
+                for line in f:
+                        line = line.strip().replace('\n','')
+                        to_ignore_files.append(line)
 
-# def should_ignore(filename):
-#         for ig in to_ignore_files:
-#                 if ig in filename:
-#                         return True
-#         return False
+def should_ignore(filename):
+        for ig in to_ignore_files:
+                if ig in filename:
+                        return True
+        return False
 
-# i = 0
-# for trace_file in trace_files:
-#         os.system('scp anjali@' + machines[i] + ':' + trace_file + ' ' + trace_file)
-#         i += 1
+i = 0
+for trace_file in trace_files:
+        os.system('scp anjali@' + machines[i] + ':' + trace_file + ' ' + trace_file)
+        i += 1
 
-# for trace_file in trace_files:
-#         assert os.path.exists(trace_file)
-#         assert os.stat(trace_file).st_size > 0
-#         if ignore_file is not None:
-#                 to_write_final = ''
-#                 with open(trace_file, 'r') as f:
-#                         for line in f:
-#                                 parts = line.split('\t')
-#                                 if parts[0] in ['rename', 'unlink', 'link', 'symlink']:
-#                                         to_write_final += line
-#                                 else:
-#                                         assert len(parts) == 4
-#                                         filename = parts[0]
-#                                         if not should_ignore(filename):
-#                                                 to_write_final += line
+for trace_file in trace_files:
+        assert os.path.exists(trace_file)
+        assert os.stat(trace_file).st_size > 0
+        if ignore_file is not None:
+                to_write_final = ''
+                with open(trace_file, 'r') as f:
+                        for line in f:
+                                parts = line.split('\t')
+                                if parts[0] in ['rename', 'unlink', 'link', 'symlink']:
+                                        to_write_final += line
+                                else:
+                                        assert len(parts) == 4
+                                        filename = parts[0]
+                                        if not should_ignore(filename):
+                                                to_write_final += line
 
-#                 os.remove(trace_file)
-#                 with open(trace_file, 'w') as f:
-#                         f.write(to_write_final)
+                os.remove(trace_file)
+                with open(trace_file, 'w') as f:
+                        f.write(to_write_final)
 
-# print 'Tracing completed...'
+print 'Tracing completed...'
 
 
 
-# ###############Step 8: Start OSD#############################
-# for i in range(0, machine_count):
-#         command = "sudo systemctl start ceph-osd@"+str(i)+";"
-#         invoke_remote_cmd(machines[i], command)
+###############Step 8: Start OSD#############################
+for i in range(0, machine_count):
+        command = "sudo systemctl start ceph-osd@"+str(i)+";"
+        invoke_remote_cmd(machines[i], command)
 
-# os.system('sleep5')
+os.system('sleep5')
 
