@@ -1,17 +1,17 @@
 #! /usr/bin/env python
-# Copyright (c) 2016 Aishwarya Ganesan and Ramnatthan Alagappan. 
+# Copyright (c) 2016 Aishwarya Ganesan and Ramnatthan Alagappan.
 # All Rights Reserved.
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,6 +29,7 @@ import argparse
 
 remote_user_name = 'anjali'
 conf_dir = '/home/anjali/my-cluster/'
+etc_conf_file = "/etc/ceph/ceph.conf"
 
 def invoke_remote_cmd(machine_ip, command):
 	cmd = 'ssh {0}@{1} \'{2}\''.format(remote_user_name, machine_ip, command)
@@ -40,6 +41,14 @@ def copy_file_from_remote(machine_ip, from_file_path, to_file_path):
 	cmd = 'scp {0}@{1}:{2} {3}'.format(remote_user_name, machine_ip, from_file_path, to_file_path)
 	os.system(cmd)
 
+def copy_file_to_remote(machine_ip, from_file_path, to_file_path):
+	cmd = 'scp {0} {1}@{2}:{3}'.format(from_file_path, remote_user_name, machine_ip, to_file_path)
+	os.system(cmd)
+
+def invoke_cmd(cmd):
+	p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	out, err = p.communicate()
+	return (out, err)
 
 
 ###############Step 1: Start  errfs#############################
@@ -109,17 +118,27 @@ for i in range(0, machine_count):
 print "stopping step 2..."
 
 ###############Step 3: Change configuration#############################
-#change configuration
+# update configuration with data directory, keep ceph.conf under conf_dir
+# unchanged, while make changes and propagate tmp_ceph.conf to /etc/ceph/
 cfg_file = '{0}/ceph.conf'.format(conf_dir)
-cfg_file_cords = '{0}/ceph_cords.conf'.format(conf_dir)
-cfg_original = '{0}/ceph_original.conf'.format(conf_dir)
-cp_command = "sudo cp "+cfg_file_cords+" "+cfg_file
-os.system(cp_command)
-go_to_dir = 'cd {0}'.format(conf_dir)
-go_to_dir = 'cd ~/my-cluster'
-os.system(go_to_dir)
-os.system('sudo ceph-deploy --overwrite-conf admin ceph-p2-node1 ceph-p2-node2')
-os.system('cd -')
+tmp_cfg_file = "{0}/tmp_ceph.conf".format(conf_dir)
+
+cfg_command = "sudo rm {0}/tmp_ceph.conf;".format(conf_dir)
+cfg_command += "cp {0}/ceph.conf {0}/tmp_ceph.conf".format(conf_dir)
+os.system(cfg_command)
+
+conf_str = "\n"
+for i in range(0, machine_count):
+	conf_str += "[osd.{0}]\n".format(str(i))
+	conf_str += "osd data = {0}\n".format(data_dirs[i])
+	conf_str += "osd max object name len = 256\nosd max object namespace len = 64\n\n"
+
+with open(tmp_cfg_file, 'a') as fh:
+	fh.write(conf_str)
+
+# TODO fix hard code
+os.system("ceph-deploy --ceph-conf {0} --overwrite-conf admin {1} {2} {3}"
+		  .format(tmp_cfg_file, machines[0], machines[1], machines[2]))
 
 print "stopping step 3...."
 
@@ -136,7 +155,7 @@ print "stopping step 4....."
 
 os.system('sleep 1')
 
-workload_command +=  " trace " 
+workload_command +=  " trace "
 for i in range(0, machine_count):
 	workload_command += data_dir_mount_points[i] + " "
 
@@ -155,12 +174,9 @@ for i in range(0, machine_count):
 	invoke_remote_cmd(machines[i], command)
 
 #revert configuration
-cp_back_command = "sudo cp "+cfg_original+" "+cfg_file
-os.system(cp_back_command)
-os.system(go_to_dir)
-print "running conf ",  os.system('pwd')
-os.system('ceph-deploy --overwrite-conf admin ceph-p2 ceph-p2-node1 ceph-p2-node2')
-os.system('cd -')
+# TODO fix hard code
+os.system("ceph-deploy --ceph-conf {0} --overwrite-conf admin {1} {2} {3}"
+		  .format(cfg_file, machines[0], machines[1], machines[2]))
 
 print "stopping step 6..."
 ###############Step 7: Unmount#############################
@@ -170,7 +186,7 @@ for mp in data_dir_mount_points:
 	i += 1
 
 to_ignore_files = []
-if ignore_file is not None:	
+if ignore_file is not None:
 	with open(ignore_file, 'r') as f:
 		for line in f:
 			line = line.strip().replace('\n','')
