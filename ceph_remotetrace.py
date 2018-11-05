@@ -41,7 +41,7 @@ def copy_file_from_remote(machine_ip, from_file_path, to_file_path):
 	os.system(cmd)
 
 ERRFS_HOME = os.path.dirname(os.path.realpath(__file__))
-fuse_command_trace = "sudo nohup ~/CORDS/errfs -f -oallow_other,nonempty,modules=subdir,subdir=%s %s trace %s > /dev/null 2>&1 &"
+fuse_command_trace = "sudo -u ceph nohup ~/CORDS/errfs -f -ononempty,modules=subdir,subdir=%s %s trace %s > /dev/null 2>&1 &"
 # fuse_command_trace = 'nohup ' + ERRFS_HOME + "/errfs -f -omodules=subdir,subdir=%s %s trace %s > /dev/null 2>&1 &"
 
 parser = argparse.ArgumentParser()
@@ -78,6 +78,7 @@ for i in range(0, machine_count):
 	command = "sudo rm -rf " + data_dir_snapshots[i] + ";"
 	command += "sudo rm -rf " + data_dir_mount_points[i] + ";"
 	command += "sudo mkdir " + data_dir_mount_points[i] + ";"
+	command += "sudo chown -R ceph.ceph " + data_dir_mount_points[i] + ";"
 	invoke_remote_cmd(machines[i], command)
 
 for i in range(0, machine_count):
