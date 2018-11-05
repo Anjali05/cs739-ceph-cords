@@ -126,3 +126,12 @@ for i in servers:
 
 print "stopping step 5"
 
+###############Step 6: Stop OSD#############################
+
+#stop osd on every machine
+for i in servers:
+	command = "sudo systemctl stop ceph-osd@"+ i +";"
+	invoke_remote_cmd(ips[i], command)
+	
+print "stopping step 6..."
+
