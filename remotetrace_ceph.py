@@ -48,7 +48,7 @@ print "starting step 1..."
 ERRFS_HOME = os.path.dirname(os.path.realpath(__file__))
 #fuse_command_trace = 'sudo nohup ~/CORDS/errfs -f -omodules=subdir,subdir=%s,nonempty,allow_other %s trace %s &'
 #fuse_command_trace = 'sudo nohup ~/CORDS/errfs -f -omodules=subdir,subdir=/var/lib/ceph/osd/ceph-0,nonempty,allow_other /var/lib/ceph/osd/ceph-0.mp trace /home/anjali/trace'
-fuse_command_trace = "sudo -u ceph nohup ~/CORDS/errfs -f -oallow_other,nonempty,modules=subdir,subdir=%s %s trace %s > /dev/null 2>&1 &"
+fuse_command_trace = "sudo -u ceph nohup ~/CORDS/errfs -f -ononempty,modules=subdir,subdir=%s %s trace %s > /dev/null 2>&1 &"
 parser = argparse.ArgumentParser()
 parser.add_argument('--trace_files', nargs='+', required = True, help = 'Trace file paths')
 parser.add_argument('--machines', nargs='+', required = True, help = 'Machine ips')
@@ -84,6 +84,7 @@ for i in range(0, machine_count):
         command = "sudo rm -rf " + data_dir_snapshots[i] + ";"
         command += "sudo rm -rf " + data_dir_mount_points[i] + ";"
         command += "sudo mkdir " + data_dir_mount_points[i] + ";"
+        command += "sudo chown -R ceph.ceph " + data_dir_mount_points[i] + ";"
         print "creating stuff"
         invoke_remote_cmd(machines[i], command)
 
@@ -124,7 +125,7 @@ cfg_file = '{0}/ceph.conf'.format(conf_dir)
 tmp_cfg_file = "{0}/tmp_ceph.conf".format(conf_dir)
 
 cfg_command = "sudo rm {0}/tmp_ceph.conf;".format(conf_dir)
-cfg_command += "cp {0}/ceph.conf {0}/tmp_ceph.conf".format(conf_dir)
+cfg_command += "cp -a {0}/ceph.conf {0}/tmp_ceph.conf".format(conf_dir)
 os.system(cfg_command)
 
 conf_str = "\n"
@@ -237,6 +238,3 @@ for i in range(0, machine_count):
         command = "sudo dd if=/dev/sdb2 of=/dev/sdb1 bs=1M;"
         command += "sudo systemctl start ceph-osd@"+str(i)+";"
         invoke_remote_cmd(machines[i], command)
-
-os.system('sleep5')
-
