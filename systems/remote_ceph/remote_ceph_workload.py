@@ -81,7 +81,7 @@ cfg_file = '{0}/ceph.conf'.format(conf_dir)
 tmp_cfg_file = "{0}/tmp_ceph.conf".format(conf_dir)
 
 cfg_command = "sudo rm {0}/tmp_ceph.conf;".format(conf_dir)
-cfg_command += "cp {0}/ceph.conf {0}/tmp_ceph.conf".format(conf_dir)
+cfg_command += "cp -a {0}/ceph.conf {0}/tmp_ceph.conf".format(conf_dir)
 os.system(cfg_command)
 
 conf_str = "\n"
