@@ -68,9 +68,11 @@ uppath = lambda _path, n: os.sep.join(_path.split(os.sep)[:-n])
 #stop osd on every machine
 for i in servers:
 	command = "sudo systemctl stop ceph-osd@"+ i +";"
+        command += "sudo dd if=/dev/sdb2 of=/dev/sdb1 bs=1M;"
 	invoke_remote_cmd(ips[i], command)
-
-
+	
+print 'reverting journal back...'
+	invoke_remote_cmd(ips[i], command)
 
 print "stopping step 2..."
 
@@ -134,4 +136,11 @@ for i in servers:
 	invoke_remote_cmd(ips[i], command)
 	
 print "stopping step 6..."
+
+###############Step 7: revert back journal block###########
+for i in servers:
+        command = "sudo dd if=/dev/sdb1 of=/dev/sdb2 bs=1M;"
+	invoke_remote_cmd(ips[i], command)
+	
+print 'reverting journal back...'
 
