@@ -48,7 +48,7 @@ print "starting step 1..."
 ERRFS_HOME = os.path.dirname(os.path.realpath(__file__))
 #fuse_command_trace = 'sudo nohup ~/CORDS/errfs -f -omodules=subdir,subdir=%s,nonempty,allow_other %s trace %s &'
 #fuse_command_trace = 'sudo nohup ~/CORDS/errfs -f -omodules=subdir,subdir=/var/lib/ceph/osd/ceph-0,nonempty,allow_other /var/lib/ceph/osd/ceph-0.mp trace /home/anjali/trace'
-fuse_command_trace = "sudo nohup ~/CORDS/errfs -f -oallow_other,nonempty,modules=subdir,subdir=%s %s trace %s > /dev/null 2>&1 &"
+fuse_command_trace = "sudo -u ceph nohup ~/CORDS/errfs -f -oallow_other,nonempty,modules=subdir,subdir=%s %s trace %s > /dev/null 2>&1 &"
 parser = argparse.ArgumentParser()
 parser.add_argument('--trace_files', nargs='+', required = True, help = 'Trace file paths')
 parser.add_argument('--machines', nargs='+', required = True, help = 'Machine ips')
@@ -89,10 +89,10 @@ for i in range(0, machine_count):
 
 for i in range(0, machine_count):
     command = "sudo dd if=/dev/sdb2 of=/dev/sdb1 bs=1M;"
-    command +=  "sudo cp -R " + data_dirs[i] + " " + data_dir_snapshots[i] + ";"
+    command +=  "sudo cp -aR " + data_dirs[i] + " " + data_dir_snapshots[i] + ";"
     command += "sudo rm -rf " + trace_files[i]
     print "copying stuff"
-  #  invoke_remote_cmd(machines[i], command)
+    invoke_remote_cmd(machines[i], command)
 
 for i in range(0, machine_count):
     command = fuse_command_trace%(data_dirs[i], data_dir_mount_points[i], trace_files[i])
@@ -234,7 +234,8 @@ print 'Tracing completed...'
 
 ###############Step 8: Start OSD#############################
 for i in range(0, machine_count):
-        command = "sudo systemctl start ceph-osd@"+str(i)+";"
+        command = "sudo dd if=/dev/sdb2 of=/dev/sdb1 bs=1M;"
+        command += "sudo systemctl start ceph-osd@"+str(i)+";"
         invoke_remote_cmd(machines[i], command)
 
 os.system('sleep5')
