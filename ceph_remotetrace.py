@@ -82,7 +82,6 @@ for i in range(0, machine_count):
 	invoke_remote_cmd(machines[i], command)
 
 for i in range(0, machine_count):
-	command = "sudo dd if=/dev/sdb2 of=/dev/sdb1 bs=1M;"
 	command =  "sudo cp -aR " + data_dirs[i] + " " + data_dir_snapshots[i] + ";"
 	command += "sudo rm -rf " + trace_files[i]
 	invoke_remote_cmd(machines[i], command)
