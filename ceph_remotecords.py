@@ -199,11 +199,11 @@ def cords_check():
                 str(op) + ' ' + str(corrupt_machine) + ':' + str(corrupt_filename) + ':' + str(block) + ':' + str(
                     err_type)
                 for mach in machines:
-                    invoke_remote_cmd(machine_ips[mach], "rm -rf " + data_dirs[mach])
-                    invoke_remote_cmd(machine_ips[mach], "cp -R " + data_dir_snapshots[mach] + ' ' + data_dirs[mach])
+                    invoke_remote_cmd(machine_ips[mach], "sudo rm -rf " + data_dirs[mach])
+                    invoke_remote_cmd(machine_ips[mach], "sudo cp -aR " + data_dir_snapshots[mach] + ' ' + data_dirs[mach])
 
-                invoke_remote_cmd(machine_ips[corrupt_machine], "rm -rf " + data_dir_mount_points[corrupt_machine])
-                invoke_remote_cmd(machine_ips[corrupt_machine], "mkdir " + data_dir_mount_points[corrupt_machine])
+                invoke_remote_cmd(machine_ips[corrupt_machine], "sudo rm -rf " + data_dir_mount_points[corrupt_machine])
+                invoke_remote_cmd(machine_ips[corrupt_machine], "sudo mkdir " + data_dir_mount_points[corrupt_machine])
 
                 fuse_start_command = fuse_command_err % (
                 data_dirs[corrupt_machine], data_dir_mount_points[corrupt_machine], corrupt_filename, block, err_type)
@@ -228,7 +228,7 @@ def cords_check():
                 os.system("sudo mkdir -p " + log_dir_path)
 
                 os.system("sudo rm -rf /tmp/shoulderr")
-                os.system("sudo touch /tmp/shoulderr; echo \'fals\' >> /tmp/shoulderr")
+                os.system("sudo touch /tmp/shoulderr; sudo echo \'fals\' >> /tmp/shoulderr")
 
                 (out, err) = invoke_cmd(workload_command_curr)
                 outfile = os.path.join(log_dir_path, 'workload.out')
