@@ -82,7 +82,8 @@ for i in range(0, machine_count):
 	invoke_remote_cmd(machines[i], command)
 
 for i in range(0, machine_count):
-	command =  "sudo cp -R " + data_dirs[i] + " " + data_dir_snapshots[i] + ";"
+	command = "sudo dd if=/dev/sdb2 of=/dev/sdb1 bs=1M;"
+	command =  "sudo cp -aR " + data_dirs[i] + " " + data_dir_snapshots[i] + ";"
 	command += "sudo rm -rf " + trace_files[i]
 	invoke_remote_cmd(machines[i], command)
 
@@ -121,7 +122,7 @@ def should_ignore(filename):
 
 i = 0
 for trace_file in trace_files:
-	os.system('scp ra@' + machines[i] + ':' + trace_file + ' ' + trace_file)
+	os.system('scp anjali@' + machines[i] + ':' + trace_file + ' ' + trace_file)
 	i += 1
 
 for trace_file in trace_files:
