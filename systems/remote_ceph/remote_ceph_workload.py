@@ -70,10 +70,8 @@ for i in servers:
 	command = "sudo systemctl stop ceph-osd@"+ i +";"
         command += "sudo dd if=/dev/sdb2 of=/dev/sdb1 bs=1M;"
 	invoke_remote_cmd(ips[i], command)
-	
-print 'reverting journal back...'
-	invoke_remote_cmd(ips[i], command)
 
+print 'reverting journal back...'
 print "stopping step 2..."
 
 ###############Step 3: Change configuration#############################
@@ -83,7 +81,8 @@ cfg_file = '{0}/ceph.conf'.format(conf_dir)
 tmp_cfg_file = "{0}/tmp_ceph.conf".format(conf_dir)
 
 cfg_command = "sudo rm {0}/tmp_ceph.conf;".format(conf_dir)
-cfg_command += "cp -a {0}/ceph.conf {0}/tmp_ceph.conf".format(conf_dir)
+cfg_command += "cp -a {0}/ceph.conf {0}/tmp_ceph.conf;".format(conf_dir)
+cfg_command += "cp -a {0}/ceph.client.admin.keyring .".format(conf_dir)
 os.system(cfg_command)
 
 conf_str = "\n"
@@ -134,13 +133,13 @@ print "stopping step 5"
 for i in servers:
 	command = "sudo systemctl stop ceph-osd@"+ i +";"
 	invoke_remote_cmd(ips[i], command)
-	
+
 print "stopping step 6..."
 
 ###############Step 7: revert back journal block###########
 for i in servers:
         command = "sudo dd if=/dev/sdb1 of=/dev/sdb2 bs=1M;"
 	invoke_remote_cmd(ips[i], command)
-	
+
 print 'reverting journal back...'
 

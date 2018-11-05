@@ -41,7 +41,7 @@ def copy_file_from_remote(machine_ip, from_file_path, to_file_path):
 	os.system(cmd)
 
 ERRFS_HOME = os.path.dirname(os.path.realpath(__file__))
-fuse_command_trace = "sudo -u ceph nohup ~/CORDS/errfs -f -ononempty,modules=subdir,subdir=%s %s trace %s > /dev/null 2>&1 &"
+fuse_command_trace = "sudo nohup ~/CORDS/errfs -f -oallow_other,nonempty,modules=subdir,subdir=%s %s trace %s > /dev/null 2>&1 &"
 # fuse_command_trace = 'nohup ' + ERRFS_HOME + "/errfs -f -omodules=subdir,subdir=%s %s trace %s > /dev/null 2>&1 &"
 
 parser = argparse.ArgumentParser()
@@ -78,19 +78,25 @@ for i in range(0, machine_count):
 	command = "sudo rm -rf " + data_dir_snapshots[i] + ";"
 	command += "sudo rm -rf " + data_dir_mount_points[i] + ";"
 	command += "sudo mkdir " + data_dir_mount_points[i] + ";"
-	command += "sudo chown -R ceph.ceph " + data_dir_mount_points[i] + ";"
+	#command += "sudo chown -R ceph.ceph " + data_dir_mount_points[i] + ";"
+        print "mount points formed"
 	invoke_remote_cmd(machines[i], command)
 
 for i in range(0, machine_count):
 	command =  "sudo cp -aR " + data_dirs[i] + " " + data_dir_snapshots[i] + ";"
 	command += "sudo rm -rf " + trace_files[i]
+        print "copying stuff"
 	invoke_remote_cmd(machines[i], command)
 
 for i in range(0, machine_count):
 	command = fuse_command_trace%(data_dirs[i], data_dir_mount_points[i], trace_files[i])
+        print "invoking fuse"
+        print command
 	invoke_remote_cmd(machines[i], command)
 
-os.system('sleep 1')
+print "fuse done"
+
+#os.system('sleep 1')
 
 workload_command +=  " trace " 
 for i in range(0, machine_count):
@@ -99,15 +105,21 @@ for i in range(0, machine_count):
 for i in range(0, machine_count):
 	workload_command += machines[i] + " "
 
+# TODO remove after test
+#exit()
+
 os.system(workload_command)
+
+print "done with workload"
 
 i = 0
 for mp in data_dir_mount_points:
+        print "unmounting fuse"
 	invoke_remote_cmd(machines[i], 'sudo fusermount -u ' + mp + '; sleep 1' + '; killall errfs >/dev/null 2>&1')
 	i += 1
 
 to_ignore_files = []
-if ignore_file is not None:	
+if ignore_file is not None:
 	with open(ignore_file, 'r') as f:
 		for line in f:
 			line = line.strip().replace('\n','')
